@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<!---Coding By CoderGirl | www.codinglabweb.com--->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!--<title>Login & Registration Form | CoderGirl</title>-->
+  <!---Custom CSS File--->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+  {% csrf_token %}
+  <div class="container">
+    <div class="registration form">
+      <header>Signup</header>
+          {%if messages %}
+					{% for message in messages%}
+					<div class="alert alert-{{message.tags}}" role="alert">
+						{{message}}
+					  </div>
+					  {% endfor %}
+					  {% endif %}
+
+
+      <form action="{% url 'register' %}" method="POST">
+        {% csrf_token %}
+        <input type="text" placeholder="Enter your username" name="username">
+        <input type="text" placeholder="Enter your email" name="email">
+        <input type="password" placeholder="Create a password" name="pass1">
+        <input type="password" placeholder="Confirm your password" name="pass2">
+        <input type="submit" class="button" value="Signup">
+        <center>
+          {% if error %}
+          <p style="color: red;">{{ error }}</p>
+          {% endif %}
+        </center>
+        
+      </form>
+      <div class="signup">
+        <span class="signup">Already have an account?
+          <a href="{% url 'Login' %}"><label for="check">Signin</label></a>
+        </span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
